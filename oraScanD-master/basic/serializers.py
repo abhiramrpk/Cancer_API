@@ -2,14 +2,17 @@ from rest_framework import serializers
 from .models import MyModel, Print
 
 class MyModelSerializer(serializers.ModelSerializer):
-
-    creator = serializers.ReadOnlyField(source='creator.username')
-    creator_id = serializers.ReadOnlyField(source='creator.id')
-    image_url = serializers.ImageField(required=False)
+    
+    name = serializers.ReadOnlyField()
+    age = serializers.ReadOnlyField()
+    weight = serializers.ReadOnlyField()
+    height = serializers.ReadOnlyField()
+    blood_group = serializers.ReadOnlyField()
+    image_url = serializers.ImageField()
 
     class Meta:
         model = MyModel
-        fields = ['id', 'creator', 'creator_id', 'title', 'description', 'image_url']
+        fields = ['id', 'name', 'age', 'weight', 'height', 'blood_group', 'image_url']
 
 class PrintSerializer(serializers.ModelSerializer):
 

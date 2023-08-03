@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",views.api_views,name='api_views'),
     path("list/", views.list, name='list'),
-    path("upload/", views.upload, name='upload'),
+    path("scan/", views.scan, name='scan'),
+    path("upload/", views.profile_upload, name='upload'),
     path("print/", views.print, name='print'),
     path('get-csrf-token/', views.get_csrf_token, name='get_csrf_token'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

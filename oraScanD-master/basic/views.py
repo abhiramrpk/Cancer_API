@@ -28,8 +28,10 @@ import logging
 @api_view(['GET'])
 def api_views(request):
     api_urls = {
+        'image scaning':'/scan/',
         'list':'/list/',
-        'upload': '/upload/',
+        'print':'/print',
+        'Profile upload': '/upload/',
     }
     return Response(api_urls)
 
@@ -47,13 +49,25 @@ def print(request):
 
 @api_view(['POST'])
 @parser_classes((MultiPartParser, FormParser))
-def upload(request):
+def scan(request):
     serializer_class = PrintSerializer(data=request.data)
     if serializer_class.is_valid():
         #image_data = serializer_class.validated_data['image_url']
         serializer_class.save()
         accuracy = load_Model()
         return HttpResponse(accuracy[0])
+        
+    else:
+        return Response(serializer_class.errors)
+    
+@api_view(['POST'])
+@parser_classes((MultiPartParser, FormParser))
+def profile_upload(request):
+    serializer_class = MyModelSerializer(data=request.data)
+    if serializer_class.is_valid():
+        #image_data = serializer_class.validated_data['image_url']
+        serializer_class.save()
+        return HttpResponse("Profile data stored")
         
     else:
         return Response(serializer_class.errors)
