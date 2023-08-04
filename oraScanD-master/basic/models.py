@@ -20,5 +20,6 @@ class MyModel(models.Model):
     age = models.IntegerField()
     weight = models.IntegerField()
     height = models.IntegerField()
-    blood_group = models.CharField(max_length=80, blank=False, null=False)
-    image_url = models.ImageField(upload_to=profile_upload_to, blank=True, null=True)
+    blood_group = models.CharField(max_length=5, blank=False, null=False)
+    profile_url = models.ImageField(upload_to=profile_upload_to,null=True)
+    image_url = models.ImageField(default=None)

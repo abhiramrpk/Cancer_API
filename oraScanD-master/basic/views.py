@@ -65,9 +65,11 @@ def scan(request):
 def profile_upload(request):
     serializer_class = MyModelSerializer(data=request.data)
     if serializer_class.is_valid():
-        #image_data = serializer_class.validated_data['image_url']
         serializer_class.save()
-        return HttpResponse("Profile data stored")
+        obj=MyModel.objects.last()
+        obj.image_url=Print.objects.last().image_url
+        obj.save()
+        return Response("Profile Updated")
         
     else:
         return Response(serializer_class.errors)
